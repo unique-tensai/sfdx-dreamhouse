@@ -34,7 +34,7 @@ node {
               }else{
                    rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
               }
-           //printf rmsg
+            printf rmsg
             println('Hello from a Job DSL script!')
             println(rmsg)
             def beginIndex = rmsg.indexOf('{')

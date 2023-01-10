@@ -30,7 +30,7 @@ node {
 
             // need to pull out assigned username
 
-            println('Hello from Authorize DevHub!')           
+            println('Completed : Authorize DevHub!')           
         }
         
         stage('Create Test Scratch Org') {
@@ -41,21 +41,12 @@ node {
             }
             if (rmsg != 0) { error 'Create Test Scrathc Org failed' }
 
-            // need to pull out assigned username
-
-            println('Hello from Test Scratch Org!')           
+            println('Completed : Test Scratch Org!')           
         }
         
           stage('Push To Test Org') {
-          //    if (isUnix()) {
-          //          rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
-          //    }else{
-          //        rc = bat returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
-          //    }
-          //  if (rc != 0) {
-          //      error 'push failed'
-          //  }
-            println('Hello from Push to Test Org!')
+
+            println('Completed : Push to Test Org!')
           }
              
     }

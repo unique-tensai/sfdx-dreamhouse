@@ -53,15 +53,15 @@ node {
         }
         
           stage('Push To Test Org') {
-              if (isUnix()) {
-                    rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
-              }else{
-                  rc = bat returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
-              }
-            if (rc != 0) {
-                error 'push failed'
-            }
-            
+          //    if (isUnix()) {
+          //          rc = sh returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
+          //    }else{
+          //        rc = bat returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
+          //    }
+          //  if (rc != 0) {
+          //      error 'push failed'
+          //  }
+            println('Hello from Push to Test Org!')
           }
              
     }

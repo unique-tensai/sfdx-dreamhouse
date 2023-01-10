@@ -35,11 +35,11 @@ node {
         
         stage('Create Test Scratch Org') {
             if (isUnix()) {
-                rc = sh returnStatus: true, script: "${toolbelt}/sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+                rmsg = sh returnStdout: true, script: "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
             }else{
-                 rc = bat returnStatus: true, script: "\"${toolbelt}\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+                rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
             }
-            if (rc != 0) { error 'Create Test Scrathc Org failed' }
+            if (rmsg != 0) { error 'Create Test Scrathc Org failed' }
 
             // need to pull out assigned username
 

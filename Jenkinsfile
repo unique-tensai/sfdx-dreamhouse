@@ -48,6 +48,11 @@ node {
 
             println('Completed : Push to Test Org!')
           }
+        
+          stage('Run Tests In Test Scratch Org') {
+
+            println('Completed : Push to Test Org!')
+          }
              
     }
 }

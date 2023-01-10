@@ -20,12 +20,6 @@ node {
     }
 
     withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
-        stage('Authorize DevHub') {   
-            rc = command "${toolbelt}/sfdx auth:jwt:grant --instanceurl ${SFDC_HOST} --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --setalias HubOrg"
-            if (rc != 0) {
-                error 'Salesforce dev hub org authorization failed.'
-            }
-        }
         stage('Create Scratch Org') {
             if (isUnix()) {
                 rc = sh returnStatus: true, script: "${toolbelt} force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
@@ -35,14 +29,14 @@ node {
             if (rc != 0) { error 'hub org authorization failed' }
 
             // need to pull out assigned username
-              if (isUnix()) {
-                rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
-              }else{
-                   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
-              }
-            printf rmsg
+ //             if (isUnix()) {
+ //               rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+ //             }else{
+ //                  rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+ //             }
+ //           printf rmsg
             println('Hello from a Job DSL script!')
-            println(rmsg)
+ //           println(rmsg)
             def beginIndex = rmsg.indexOf('{')
             def endIndex = rmsg.indexOf('}')
             println(beginIndex)

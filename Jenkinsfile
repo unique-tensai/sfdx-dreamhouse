@@ -35,9 +35,9 @@ node {
         
         stage('Create Test Scratch Org') {
             if (isUnix()) {
-                rmsg = sh returnStdout: true, script: "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
+                rmsg = sh returnStdout: true, script: "${toolbelt} force:config:set defaultdevhubusername=hextensaicicdpoc"
             }else{
-                rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
+                rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:config:set defaultdevhubusername=hextensaicicdpoc"
             }
             if (rmsg != 0) { error 'Create Test Scrathc Org failed' }
 

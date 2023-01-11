@@ -35,19 +35,19 @@ node {
         
         stage('Create Test Scratch Org') {
             if (isUnix()) {
-                sh returnStdout: true, script: "${toolbelt} force:org:display -u hextensaicicdpoc"
-                sh returnStdout: true, script: "${toolbelt} config:set defaultusername=hextensaicicdpoc --global"
-                sh returnStdout: true, script: "${toolbelt} force:config:set defaultdevhubusername=hextensaicicdpoc"
-                sh returnStdout: true, script: "${toolbelt} config:list"
-                sh returnStdout: true, script: "${toolbelt} force:org:open"
-                sh returnStdout: true, script: "${toolbelt} force:org:list"
+                rmsg1 = sh returnStdout: true, script: "${toolbelt} force:org:display -u hextensaicicdpoc"
+                rmsg2 = sh returnStdout: true, script: "${toolbelt} config:set defaultusername=hextensaicicdpoc --global"
+                rmsg3 = sh returnStdout: true, script: "${toolbelt} force:config:set defaultdevhubusername=hextensaicicdpoc"
+                rmsg4 = sh returnStdout: true, script: "${toolbelt} config:list"
+                rmsg5 = sh returnStdout: true, script: "${toolbelt} force:org:open"
+                rmsg6 = sh returnStdout: true, script: "${toolbelt} force:org:list"
             }else{
-                bat returnStdout: true, script: "\"${toolbelt}\" force:org:display -u hextensaicicdpoc"
-                bat returnStdout: true, script: "\"${toolbelt}\" config:set defaultusername=hextensaicicdpoc --global"
-                bat returnStdout: true, script: "\"${toolbelt}\" force:config:set defaultdevhubusername=hextensaicicdpoc"
-                bat returnStdout: true, script: "\"${toolbelt}\" config:list"
-                bat returnStdout: true, script: "\"${toolbelt}\" force:org:open"
-                bat returnStdout: true, script: "\"${toolbelt}\" force:org:list"
+                rmsg1 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:display -u hextensaicicdpoc"
+                rmsg2 = bat returnStdout: true, script: "\"${toolbelt}\" config:set defaultusername=hextensaicicdpoc --global"
+                rmsg3 = bat returnStdout: true, script: "\"${toolbelt}\" force:config:set defaultdevhubusername=hextensaicicdpoc"
+                rmsg4 = bat returnStdout: true, script: "\"${toolbelt}\" config:list"
+                rmsg5 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:open"
+                rmsg6 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:list"
             }
             if (rmsg != 0) { error 'Create Test Scrathc Org failed' }
 

@@ -34,22 +34,13 @@ node {
         }
         
         stage('Create Test Scratch Org') {
-            if (isUnix()) {
-                rmsg1 = sh returnStdout: true, script: "${toolbelt} force:org:display -u hextensaicicdpoc"
-                rmsg2 = sh returnStdout: true, script: "${toolbelt} config:set defaultusername=hextensaicicdpoc --global"
-                rmsg3 = sh returnStdout: true, script: "${toolbelt} force:config:set defaultdevhubusername=hextensaicicdpoc"
-                rmsg4 = sh returnStdout: true, script: "${toolbelt} config:list"
-                rmsg5 = sh returnStdout: true, script: "${toolbelt} force:org:open"
-                rmsg6 = sh returnStdout: true, script: "${toolbelt} force:org:list"
-            }else{
-                rmsg1 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:display -u hextensaicicdpoc"
-                rmsg2 = bat returnStdout: true, script: "\"${toolbelt}\" config:set defaultusername=hextensaicicdpoc --global"
-                rmsg3 = bat returnStdout: true, script: "\"${toolbelt}\" force:config:set defaultdevhubusername=hextensaicicdpoc"
-                rmsg4 = bat returnStdout: true, script: "\"${toolbelt}\" config:list"
-                rmsg5 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:open"
-                rmsg6 = bat returnStdout: true, script: "\"${toolbelt}\" force:org:list"
-            }
-            if (rmsg != 0) { error 'Create Test Scrathc Org failed' }
+              if (isUnix()) {
+                rmsg = sh returnStdout: true, script: "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
+              }else{
+                   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
+              }
+            
+            if ((rmsg != 0)  { error 'Create Test Scrathc Org failed' }
 
             println('Completed : Test Scratch Org!')           
         }

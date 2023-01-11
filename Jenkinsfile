@@ -34,13 +34,13 @@ node {
         }
         
         stage('Create Test Scratch Org') {
-              if (isUnix()) {
+            if (isUnix()) {
                 rmsg = sh returnStdout: true, script: "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
-              }else{
-                   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
-              }
+            }else{
+                 rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
+            }
             
-            if ((rmsg != 0)  { error 'Create Test Scrathc Org failed' }
+            if (rmsg != 0)  { error 'Create Test Scrathc Org failed' }
 
             println('Completed : Test Scratch Org!')           
         }

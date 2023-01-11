@@ -36,9 +36,9 @@ node {
         
         stage('Create Test Scratch Org') {
             if (isUnix()) {
-                rmsg = sh returnStdout: true, script: "${toolbelt} force:org:display --targetusername installorg"
+                rmsg = sh returnStdout: true, script: "${toolbelt} force:org:display --username ${HUB_ORG}"
             }else{
-                 rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:display --targetusername installorg"
+                 rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:org:display --username ${HUB_ORG}"
             }
             
             if (rmsg != 0)  { error 'Create Test Scrathc Org failed' }
